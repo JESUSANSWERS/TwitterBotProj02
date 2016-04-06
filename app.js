@@ -43,6 +43,8 @@ var T = new Twit(config); //T is my connection to the API / twitter package
 //Setting up a user stream
 var stream = T.stream('user');
 
+
+
 //Check when someone fallows me
 stream.on('follow', followed);
 
@@ -57,10 +59,12 @@ function followed(Msg){
   var screenName = Msg.source.screen_name;
   tweetIt('Hi @' + screenName + ' Thanks for following me!');
   console.log("You have a new follower  - " + screenName);
+
 }
 
-//Setting how often I want my bot to run
-setInterval(tweetIt, 1000*60*60*8);
+
+//Setting how often I want my bot to run  --- 1000*60*60*8);
+setInterval(tweetIt, 1000*60);
 
 var request = require('request');
 
@@ -69,8 +73,7 @@ var baseURL = 'http://www.ourmanna.com/verses/api/get?format=text&order=random' 
 
 
 //Function that will post on my twitter
-function tweetIt(){
-
+function tweetIt(txt){
 
   request( {url :baseURL} , function(error, response, body){
     console.log(" ----- ");
@@ -78,7 +81,13 @@ function tweetIt(){
     console.log(" ---- ");
     //console.log(response);
 
-    if (body.length > 140){
+
+    /* Here I am checking if next verse has more than 140 characters. If so it will call the function tweetIt
+    and search for another verse until it finds one that has less than 140 characters
+     */
+
+
+    if (body.length >= 140){
       //Todo -
       //var res = body.substr(0,137);
       //console.log (res + "...");
@@ -89,13 +98,15 @@ function tweetIt(){
     }else{
       console.log("Verse was sent");
     }
+    var followme = {
+      status: txt
+    };
 
     var tweet = {
       status: body
-
     };
 
-    T.post('statuses/update',tweet, tweeted);
+    T.post('statuses/update',tweet, tweeted, followme);
 
   });
 
@@ -105,7 +116,7 @@ function tweetIt(){
       console.log("Something went wrong");
       console.log("ERR "+err);
     }else{
-      console.log("Post tweeted");
+      console.log("It works");
     }
   }
 }
