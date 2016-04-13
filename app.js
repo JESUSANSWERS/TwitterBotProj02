@@ -34,11 +34,20 @@ var Twit = require('twit');
 
 //Made a file with all the API keys called config.js
 //Requiring the information that is in the config.js
-var config = require('./config');
-console.log(config);
+//var config = require('./config');
+//console.log(config);
 
 //Making a new twit object with config
-var T = new Twit(config); //T is my connection to the API / twitter package
+//var T = new Twit(config); //T is my connection to the API / twitter package
+
+var T = new Twit({
+  consumer_key: process.env.CONSUMER_KEY,
+  consumer_secret: process.env.CONSUMER_SECRET,
+  access_token: process.env.ACCESS_TOKEN,
+  access_token_secret: process.env.ACCESS_TOKEN_SECRET
+});
+
+
 
 //Setting up a user stream
 var stream = T.stream('user');
@@ -64,7 +73,7 @@ function followed(Msg){
 
 
 //Setting how often I want my bot to run  --- 1000*60*60*8);
-setInterval(tweetIt, 1000*60);
+setInterval(tweetIt, 1000*60*60*8);
 
 var request = require('request');
 
@@ -98,6 +107,8 @@ function tweetIt(txt){
     }else{
       console.log("Verse was sent");
     }
+
+
     var followme = {
       status: txt
     };
@@ -109,7 +120,6 @@ function tweetIt(txt){
     T.post('statuses/update',tweet, tweeted, followme);
 
   });
-
 
   function tweeted(err, data, response){
     if(err){
