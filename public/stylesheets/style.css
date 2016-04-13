@@ -57,3 +57,7 @@ blockquote:before {
   color: #dddddd ;
   text-align: center;
 }
+
+.jumbotron{
+  background-size: 100%;
+}

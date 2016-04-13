@@ -1,7 +1,11 @@
 extends layout
 
 block content
-  h1= title
+
+  .Container
+    .jumbotron
+      h1= title
+
 
   h2 About this page:
 
@@ -24,8 +28,6 @@ block content
         p
           #ourmanna-verse Loading...
           script(src='http://www.ourmanna.com/verses/api/js/?order=random', type='text/javascript')
-
-
 
 
 
