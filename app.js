@@ -37,6 +37,7 @@ var Twit = require('twit');
 //var config = require('./config');
 //console.log(config);
 
+
 //Making a new twit object with config
 //var T = new Twit(config); //T is my connection to the API / twitter package
 
