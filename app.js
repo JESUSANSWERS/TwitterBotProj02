@@ -79,7 +79,7 @@ setInterval(tweetIt, 1000*60*60*8);
 var request = require('request');
 
 
-var baseURL = 'http://www.ourmanna.com/verses/api/get?format=text&order=random' ;
+var baseURL = 'https://www.ourmanna.com/verses/api/get?format=text&order=random' ;
 
 
 //Function that will post on my twitter
