@@ -74,7 +74,7 @@ function followed(Msg){
 
 
 //Setting how often I want my bot to run  --- 1000*60*60*8);
-setInterval(tweetIt, 1000*60*60*8);
+setInterval(tweetIt, 1000*60*60*3);
 
 var request = require('request');
 
